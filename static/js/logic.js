@@ -3,7 +3,7 @@ var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significan
 
 
 //Grabbing the GeoJSON data
-d3.json(link).then(function(data) {
+d3.json(link).then(function (data) {
     // Creating a GeoJSON layer with the retrieved data
     createFeatures(data.features);
 });
@@ -72,37 +72,37 @@ function createMap(earthquakes) {
         collapsed: false
     }).addTo(myMap);
 
-    console.log("control.layers");
-//     // //get colour radius from the query URL
-//     // //defaultStatus.json(link, function(data){
-//     //     function style(feature) {
-//     //     return {
-//     //         opacity: 1,
-//     //         fillopacity: 1,
-//     //         fillcolor: getColor(feature.properties.mag),
-//     //         color: "grey",
-//     //         radius: getRadius(feature.properties.mag),
-//     //         stroke: true,
-//     //         weight: 0.5
-//     //     };
-// };
-
-// // function mapColour(mag) { };
-// // //Create the variable for the circle in the eathquake map
-// // function CirColour(size) {
-// //     if (magnitude >= 5) {
-// //         return "red";
-// //     }
-// //     else if (magnitude >= 4) {
-// //         return "darkorange";
-// //     }
-// //     else if (magnitude >= 3) {
-// //         return "orange";
+//     console.log("control.layers");
+// //get colour radius from the query URL
+// d3.json(link, function(data){
+//     function style(feature) {
+//         return {
+//             opacity: 1,
+//             fillopacity: 1,
+//             fillcolor: getColor(feature.properties.mag),
+//             color: "grey",
+//             radius: getRadius(feature.properties.mag),
+//             stroke: true,
+//             weight: 0.5
+//         };
 //     }
-//      else if (magnitude >= 2) {
-//          return "yellow";
+
+//     function mapColour(mag) { };
+// //Create the variable for the circle in the eathquake map
+// function CirColour(size) {
+//     if (magnitude >= 5) {
+//          return "red";
 //      }
-//      else if magnitude >= 1 {
-//          return "green";
+//      else if (magnitude >= 4) {
+//          return "darkorange";
 //      }
-//  };
+//      else if (magnitude >= 3) {
+//          return "orange";
+//      }
+//       else if (magnitude >= 2) {
+//           return "yellow";
+//       }
+//       else if magnitude >= 1 {
+//           return "green";
+//       }
+//   };
