@@ -39,6 +39,19 @@ var baseMaps = {
     darkmap: darkmap
 };
 
+//get colour radius from the query URL
+defaultStatus.jason(queryUrl, function(data){
+    function style(feature) {
+    return {
+        opacity: 1,
+        fillopacity: 1,
+        fillcolor: getColor(feature.properties.mag),
+        color: "grey",
+        radius: getRadius(feature.properties.mag),
+        stroke: true,
+        weight: 0.5
+    };
+}
 function mapColour(mag)
 //Create the variable for the circle in the eathquake map
 function CirColour(size) {
