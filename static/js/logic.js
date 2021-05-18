@@ -8,6 +8,18 @@ var myMap = L.map("map", {
 
 streets.addTo(myMap);
 
+//Use This link to Get geojson data
+var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson";
+
+//Grabbing the GeoJSON data
+d3.json(link).then(function(data) {
+    // Creating a GeoJSON layer with the retrieved data
+    L.geoJson(data).addTo(myMap);
+}); 
+
+
+
+
 function createMap(eathquakes) {
 // Add the dark layer
     var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -25,14 +37,9 @@ function createMap(eathquakes) {
         id: "mapbox/streets-v11",
         accessToken: API_KEY
 });
-//Use This link to Get geojson data
-var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson";
 
-//Grabbing the GeoJSON data
-d3.json(link).then(function(data) {
-    // Creating a GeoJSON layer with the retrieved data
-    L.geoJson(data).addTo(myMap);
-}); 
+
+
 
 // Only one base Layer can shown at a time
 var baseMaps = {
