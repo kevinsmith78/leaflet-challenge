@@ -17,9 +17,23 @@ d3.json(link).then(function(data) {
     L.geoJson(data).addTo(myMap);
 }); 
 
+function createFeatures(earthquakeData) {
+    // Define a function we want to run once for each feature in the features array
+    // Give each feature a popup describing the place and time of the earthquake
+    function onEachFeature(feature, layer) {
+        layer.bindPopup("<h3>" + feature.properties.place +
+            "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+    }
+    // Create a GeoJSON layer containing the features array on the earthquakeData object
+    // Run the onEachFeature function once for each piece of data in the array
+    var earthquakes = L.geoJSON(earthquakeData, {
+        onEachFeature: onEachFeature, //add popups
+        pointToLayer: pointFunction // add circles
+    });
 
-
-
+    // Sending our earthquakes layer to the createMap function
+    createMap(earthquakes);
+}
 function createMap(eathquakes) {
 // Add the dark layer
     var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -37,9 +51,6 @@ function createMap(eathquakes) {
         id: "mapbox/streets-v11",
         accessToken: API_KEY
 });
-
-
-
 
 // Only one base Layer can shown at a time
 var baseMaps = {
