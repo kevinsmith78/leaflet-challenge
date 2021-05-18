@@ -1,6 +1,7 @@
 //Use This link to Get geojson data
 var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson";
 
+
 //Grabbing the GeoJSON data
 d3.json(link).then(function (data) {
     // Creating a GeoJSON layer with the retrieved data
@@ -19,12 +20,13 @@ function createFeatures(earthquakeData) {
     // Run the onEachFeature function once for each piece of data in the array
     var earthquakes = L.geoJSON(earthquakeData, {
         onEachFeature: onEachFeature //add popups
-    //    pointToLayer: pointFunction // add circles
+        pointToLayer: oneachlayer // add circles
     });
 
     // Sending our earthquakes layer to the createMap function
     createMap(earthquakes);
 }
+
 function createMap(earthquakes) {
     console.log("createMap");
     // Add the dark layer
@@ -46,8 +48,8 @@ function createMap(earthquakes) {
 
     // Only one base Layer can shown at a time
     var baseMaps = {
-        streets: streets,
-        darkmap: darkmap
+        "streets": streets,
+        "darkmap": darkmap
     };
 
     // Create overlay object to hold our overlay layer
