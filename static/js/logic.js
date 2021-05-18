@@ -1,6 +1,6 @@
 //Use This link to Get geojson data
 var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson";
-
+var plates = "https://earthquake.usgs.gov/arcgis/rest/services/eq/map_plateboundaries/MapServer?f=pjson" 
 
 //Grabbing the GeoJSON data
 d3.json(link).then(function (data) {
@@ -71,11 +71,11 @@ function createMap(earthquakes) {
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(myMap);
+}
 
-//     console.log("control.layers");
-// //get colour radius from the query URL
-// d3.json(link, function(data){
-//     function style(feature) {
+//get colour radius from the query URL
+d3.json(link, function(data){
+    function style(feature) {
 //         return {
 //             opacity: 1,
 //             fillopacity: 1,
