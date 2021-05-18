@@ -63,7 +63,7 @@ function createMap(earthquakes) {
     //
 
     var myMap = L.map("mapid", {
-        center: [40.7128, -74.0059],
+        center: [37.7728, 122.0059],
         zoom: 5,
         layers: [streets, earthquakes]
     });
@@ -73,36 +73,36 @@ function createMap(earthquakes) {
     }).addTo(myMap);
 
     console.log("control.layers");
-    // //get colour radius from the query URL
-    // //defaultStatus.json(link, function(data){
-    //     function style(feature) {
-    //     return {
-    //         opacity: 1,
-    //         fillopacity: 1,
-    //         fillcolor: getColor(feature.properties.mag),
-    //         color: "grey",
-    //         radius: getRadius(feature.properties.mag),
-    //         stroke: true,
-    //         weight: 0.5
-    //     };
-};
-
-// function mapColour(mag) { };
-// //Create the variable for the circle in the eathquake map
-// function CirColour(size) {
-//     if (magnitude >= 5) {
-//         return "red";
-//     }
-//     else if (magnitude >= 4) {
-//         return "darkorange";
-//     }
-//     else if (magnitude >= 3) {
-//         return "orange";
-//     }
-//     else if (magnitude >= 2) {
-//         return "yellow";
-//     }
-//     else if magnitude >= 1 {
-//         return "green";
-//     }
+//     // //get colour radius from the query URL
+//     // //defaultStatus.json(link, function(data){
+//     //     function style(feature) {
+//     //     return {
+//     //         opacity: 1,
+//     //         fillopacity: 1,
+//     //         fillcolor: getColor(feature.properties.mag),
+//     //         color: "grey",
+//     //         radius: getRadius(feature.properties.mag),
+//     //         stroke: true,
+//     //         weight: 0.5
+//     //     };
 // };
+
+// // function mapColour(mag) { };
+// // //Create the variable for the circle in the eathquake map
+// // function CirColour(size) {
+// //     if (magnitude >= 5) {
+// //         return "red";
+// //     }
+// //     else if (magnitude >= 4) {
+// //         return "darkorange";
+// //     }
+// //     else if (magnitude >= 3) {
+// //         return "orange";
+//     }
+//      else if (magnitude >= 2) {
+//          return "yellow";
+//      }
+//      else if magnitude >= 1 {
+//          return "green";
+//      }
+//  };
