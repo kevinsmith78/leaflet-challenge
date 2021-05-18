@@ -3,7 +3,7 @@ var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significan
 
 
 //Grabbing the GeoJSON data
-d3.json(link).then(function (data) {
+d3.json(link).then(function(data) {
     // Creating a GeoJSON layer with the retrieved data
     createFeatures(data.features);
 });
@@ -16,11 +16,15 @@ function createFeatures(earthquakeData) {
         layer.bindPopup("<h3>" + feature.properties.place +
             "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
     }
+    function pointFunction(feature, layer) {
+        // console.log(feature)
+        return L.circleMarker(layer, { radius: feature.properties.mag * 10 });
+    }
     // Create a GeoJSON layer containing the features array on the earthquakeData object
     // Run the onEachFeature function once for each piece of data in the array
     var earthquakes = L.geoJSON(earthquakeData, {
-        onEachFeature: onEachFeature //add popups
-        pointToLayer: oneachlayer // add circles
+        onEachFeature: onEachFeature, //add popups
+        pointToLayer: pointFunction // add circles
     });
 
     // Sending our earthquakes layer to the createMap function
