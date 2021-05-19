@@ -55,25 +55,26 @@ var legend = L.control({
     position:"bottom right"
 });
 
-legend.onAdd = function() {
-    var div = L.DomUtil.create("div", "info legend");
-    var grades = [0,1,2,3,4,5];
-    var colors = [
-        "blue",
-        "green",
-        "yellow",
-        "gold",
-        "orange",
-        "red"
-    ];
+    legend.onAdd = function() {
+        var div = L.DomUtil.create("div", "info legend");
+        var grades = [0,1,2,3,4,5];
+        var colors = [
+            "blue",
+            "green",
+            "yellow",
+            "gold",
+            "orange",
+            "red"
+        ];
 
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-          "<i style='background: " + colors[i] + "'></i> " +
-          grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
-    }
-    return div;
-};
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+            "<i style='background: " + colors[i] + "'></i> " +
+            grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+        }
+        return div;
+    };
+    legend.addTo(myMap);
 
 
 function createMap(earthquakes) {
