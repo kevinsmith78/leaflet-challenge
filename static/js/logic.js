@@ -1,6 +1,6 @@
 //Use This link to Get geojson data
 var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson";
-var plates = "https://earthquake.usgs.gov/arcgis/rest/services/eq/map_plateboundaries/MapServer?f=pjson" 
+ 
 
 //Grabbing the GeoJSON data
 d3.json(link).then(function (data) {
@@ -76,19 +76,19 @@ function createMap(earthquakes) {
 //get colour radius from the query URL
 d3.json(link, function(data){
     function style(feature) {
-//         return {
-//             opacity: 1,
-//             fillopacity: 1,
-//             fillcolor: getColor(feature.properties.mag),
-//             color: "grey",
-//             radius: getRadius(feature.properties.mag),
-//             stroke: true,
-//             weight: 0.5
-//         };
-//     }
+         return {
+             opacity: 1,
+             fillopacity: 1,
+             fillcolor: getColor(feature.properties.mag),
+             color: "grey",
+             radius: getRadius(feature.properties.mag),
+             stroke: true,
+             weight: 0.5
+            };
+        }    
 
-//     function mapColour(mag) { };
-// //Create the variable for the circle in the eathquake map
+    function mapColour(mag) { 
+//Create the variable for the circle in the eathquake map
 // function CirColour(size) {
 //     if (magnitude >= 5) {
 //          return "red";
