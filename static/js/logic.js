@@ -1,6 +1,7 @@
 //Use This link to Get geojson data
-var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson";
- 
+var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson"
+
+var plate = "https://earthquake.usgs.gov/arcgis/rest/services/eq/map_plateboundaries/MapServer?f=pjson"
 
 //Grabbing the GeoJSON data
 d3.json(link).then(function (data) {
@@ -30,6 +31,50 @@ function createFeatures(earthquakeData) {
     // Sending our earthquakes layer to the createMap function
     createMap(earthquakes);
 }
+
+// set different color from magnitude
+    function getColor(magnitude) {
+    switch (true) {
+    case magnitude > 5:
+      return "red";
+    case magnitude > 4:
+      return "orange";
+    case magnitude > 3:
+      return "gold";
+    case magnitude > 2:
+      return "yellow";
+    case magnitude > 1:
+      return "green";
+    default:
+      return "blue";
+    }
+}
+
+// add legend
+var legend = L.control({
+    position:"bottom right"
+});
+
+legend.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    var grades = [0,1,2,3,4,5];
+    var colors = [
+        "blue",
+        "green",
+        "yellow",
+        "gold",
+        "orange",
+        "red"
+    ];
+
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+          "<i style='background: " + colors[i] + "'></i> " +
+          grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+    }
+    return div;
+};
+
 
 function createMap(earthquakes) {
     console.log("createMap");
@@ -72,37 +117,3 @@ function createMap(earthquakes) {
         collapsed: false
     }).addTo(myMap);
 }
-
-//get colour radius from the query URL
-d3.json(link, function(data){
-    function style(feature) {
-         return {
-             opacity: 1,
-             fillopacity: 1,
-             fillcolor: getColor(feature.properties.mag),
-             color: "grey",
-             radius: getRadius(feature.properties.mag),
-             stroke: true,
-             weight: 0.5
-            };
-        }    
-
-    function mapColour(mag) { 
-//Create the variable for the circle in the eathquake map
-// function CirColour(size) {
-//     if (magnitude >= 5) {
-//          return "red";
-//      }
-//      else if (magnitude >= 4) {
-//          return "darkorange";
-//      }
-//      else if (magnitude >= 3) {
-//          return "orange";
-//      }
-//       else if (magnitude >= 2) {
-//           return "yellow";
-//       }
-//       else if magnitude >= 1 {
-//           return "green";
-//       }
-//   };
