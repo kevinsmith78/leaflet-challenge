@@ -32,51 +32,6 @@ function createFeatures(earthquakeData) {
     createMap(earthquakes);
 }
 
-// set different color from magnitude
-    function getColor(magnitude) {
-    switch (true) {
-    case magnitude > 5:
-      return "red";
-    case magnitude > 4:
-      return "orange";
-    case magnitude > 3:
-      return "gold";
-    case magnitude > 2:
-      return "yellow";
-    case magnitude > 1:
-      return "green";
-    default:
-      return "blue";
-    }
-}
-
-// add legend
-var legend = L.control({
-    position:"bottom right"
-});
-
-    legend.onAdd = function() {
-        var div = L.DomUtil.create("div", "info legend");
-        var grades = [0,1,2,3,4,5];
-        var colors = [
-            "blue",
-            "green",
-            "yellow",
-            "gold",
-            "orange",
-            "red"
-        ];
-
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-            "<i style='background: " + colors[i] + "'></i> " +
-            grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
-        }
-        return div;
-    };
-    legend.addTo(myMap);
-
-
 function createMap(earthquakes) {
     console.log("createMap");
     // Add the dark layer
@@ -95,26 +50,81 @@ function createMap(earthquakes) {
         id: "mapbox/streets-v11",
         accessToken: API_KEY
     });
-
-    // Only one base Layer can shown at a time
+// Only one base Layer can shown at a time
     var baseMaps = {
         "streets": streets,
         "darkmap": darkmap
     };
 
-    // Create overlay object to hold our overlay layer
+// Create overlay object to hold our overlay layer
     var overlayMaps = {
         Earthquakes: earthquakes
     };
-    //
-
+    
     var myMap = L.map("mapid", {
-        center: [37.7728, 122.0059],
-        zoom: 5,
-        layers: [streets, earthquakes]
-    });
-    // Add the layer control to the map
+    center: [37.7728, 122.0059],
+    zoom: 5,
+    layers: [streets, earthquakes]
+});
+// Add the layer control to the map
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(myMap);
 }
+    
+// set different color from magnitude
+//  GET color radius call to the query URL
+d3.json(link, function (data) {
+    function styleInfo(feature) {
+        return {
+            opacity: 1,
+            fillOpacity: 1,
+            fillColor: getColor(feature.properties.mag),
+            color: "#000000",
+            radius: getRadius(feature.properties.mag),
+            stroke: true,
+            weight: 0.5
+        };
+    }
+    function getColor(magnitude) {
+        switch (true) {
+            case magnitude > 5:
+                return "red";
+            case magnitude > 4:
+                return "orange";
+            case magnitude > 3:
+                return "gold";
+            case magnitude > 2:
+                return "yellow";
+            case magnitude > 1:
+                return "green";
+            default:
+                return "blue";
+        }
+    }
+
+    // add legend
+    var legend = L.control({
+        position: "bottom right"
+    });
+
+    legend.onAdd = function () {
+        var div = L.DomUtil.create("div", "info legend");
+        var grades = [0, 1, 2, 3, 4, 5];
+        var colors = [
+            "blue",
+            "green",
+            "yellow",
+            "gold",
+            "orange",
+            "red"
+        ];
+
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                "<i style='background: " + colors[i] + "'></i> " +
+                grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+        }
+        return div;
+    };
+});
